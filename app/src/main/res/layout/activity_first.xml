@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.dingqiqi.correlationview.CorrelationView
+        android:id="@+id/correlationView1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="#0000ff"
+            android:gravity="center"
+            android:text="Hello World!"
+            android:textSize="20sp" />
+
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </com.dingqiqi.correlationview.CorrelationView>
+
+
+</RelativeLayout>
