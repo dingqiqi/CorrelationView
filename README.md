@@ -17,11 +17,22 @@
      *
      * @param view
      */
+   
     public void setBodyView(View view) {
+    
         if (view == null) {
+        
             throw new IllegalArgumentException("View 不能为空");
+            
         }
+        
         mBodyView = view;
+        
     }
     
+    
+    
     有bug欢迎提出   QQ957789074
+    
+    
+    
