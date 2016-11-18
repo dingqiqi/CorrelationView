@@ -13,8 +13,10 @@
 
 只不过要多调用一个方法
     /**
+    
      * 只能设置滑动的View(ps:ListView,RecycleView,ScrollView)，用于判断是否可以滑动来改变HeadView的高度
      *
+     
      * @param view
      */
    
