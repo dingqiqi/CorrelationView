@@ -19,6 +19,8 @@ public class CustomPageAdapter extends PagerAdapter {
     private Context mContext;
     private ListView mListView;
 
+    private View mCurrentView;
+
     public CustomPageAdapter(Context mContext) {
         this.mContext = mContext;
     }
@@ -48,8 +50,21 @@ public class CustomPageAdapter extends PagerAdapter {
     }
 
     @Override
+    public void setPrimaryItem(ViewGroup container, int position, Object object) {
+        mCurrentView = (View) object;
+    }
+
+    /**
+     * 获取当前页面
+     * @return
+     */
+    public View getCurrentView() {
+        return mCurrentView;
+    }
+
+    @Override
     public int getCount() {
-        return 4;
+        return 6;
     }
 
     @Override

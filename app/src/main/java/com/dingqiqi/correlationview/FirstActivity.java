@@ -30,6 +30,7 @@ public class FirstActivity extends AppCompatActivity {
     private boolean mIsFirst = true;
 
     private TextView mTextView;
+    private CustomPageAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +47,10 @@ public class FirstActivity extends AppCompatActivity {
         }
 
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
-        CustomPageAdapter adapter = new CustomPageAdapter(this);
-        mViewPager.setAdapter(adapter);
+        mAdapter = new CustomPageAdapter(this);
+        mViewPager.setAdapter(mAdapter);
+        //解决超过3个界面后，之后的界面联动失败
+        mViewPager.setOffscreenPageLimit(mAdapter.getCount());
 
         mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -55,6 +58,10 @@ public class FirstActivity extends AppCompatActivity {
                 if (mIsFirst) {
                     mIsFirst = false;
                     View view = mViewPager.getChildAt(position);
+                    if (view == null) {
+                        view = mAdapter.getCurrentView();
+                    }
+
                     if (view instanceof ViewGroup) {
                         mCorrelationView.setBodyView(((ViewGroup) view).getChildAt(0));
                     }
@@ -63,9 +70,16 @@ public class FirstActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
+                Log.i("aaa", "start " + position);
                 View view = mViewPager.getChildAt(position);
 
-                if (view instanceof ViewGroup) {
+                if (view == null) {
+                    //解决超过3个界面后，之后的界面获取为null
+                    view = mAdapter.getCurrentView();
+                }
+
+                if (view != null && view instanceof ViewGroup) {
+                    //Log.i("aaa", (((ViewGroup) view).getChildAt(0) instanceof ListView) + " end " + position);
                     mCorrelationView.setBodyView(((ViewGroup) view).getChildAt(0));
                 }
             }

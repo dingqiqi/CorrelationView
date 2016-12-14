@@ -4,11 +4,13 @@ import android.animation.ValueAnimator;
 import android.content.Context;
 import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 
 /**
+ * 上下联动控件
  * Created by dingqiqi on 2016/11/18.
  */
 public class CorrelationView extends LinearLayout {
@@ -121,7 +123,7 @@ public class CorrelationView extends LinearLayout {
      * @return
      */
     private boolean viewCanScroll() {
-        //Log.i("aaa", "canscroll " + ViewCompat.canScrollVertically(mBodyView, -1));
+        //Log.i("aaa", " canscroll " + ViewCompat.canScrollVertically(mBodyView, -1));
         if (ViewCompat.canScrollVertically(mBodyView, -1)) {
             return true;
         }
