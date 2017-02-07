@@ -53,7 +53,11 @@ public class CorrelationView extends LinearLayout {
     /**
      * 动画时间
      */
-    private long mDuration = 300;
+    private long mDuration = 200;
+    /**
+     * 移动后改变比例
+     */
+    private int mChangeProport = 3;
 
     public CorrelationView(Context context) {
         super(context);
@@ -176,8 +180,15 @@ public class CorrelationView extends LinearLayout {
 
                     //减小高度(手指没把headView完全划进去)
                     LayoutParams params = (LayoutParams) mHeadView.getLayoutParams();
-                    //headView的高度到0
-                    mValueAnimator = ValueAnimator.ofInt(params.height, 0);
+
+                    if (mHeadHeight - params.height < mHeadHeight / mChangeProport) {
+                        //headView的高度还原
+                        mValueAnimator = ValueAnimator.ofInt(params.height, mHeadHeight);
+                    } else {
+                        //headView的高度到0
+                        mValueAnimator = ValueAnimator.ofInt(params.height, 0);
+                    }
+
                     mValueAnimator.setDuration(mDuration);
                     mValueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                         @Override
@@ -194,8 +205,15 @@ public class CorrelationView extends LinearLayout {
 
                     //增大高度(手指没把headView完全划出来)
                     LayoutParams params = (LayoutParams) mHeadView.getLayoutParams();
-                    //从控件高度到最大高度
-                    mValueAnimator = ValueAnimator.ofInt(params.height, mHeadHeight);
+
+                    if (params.height < mHeadHeight / mChangeProport) {
+                        //headView的高度还原
+                        mValueAnimator = ValueAnimator.ofInt(params.height, 0);
+                    } else {
+                        //从控件高度到最大高度
+                        mValueAnimator = ValueAnimator.ofInt(params.height, mHeadHeight);
+                    }
+
                     mValueAnimator.setDuration(mDuration);
                     mValueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                         @Override
